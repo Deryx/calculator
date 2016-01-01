@@ -38,42 +38,16 @@ $(function() {
                     break;
                 case "=":
                     operand2 = parseFloat(numberText);
-                    switch (operator) {
-                        case 'plus':
-                            if (isNaN(operand2) == false) {
-                                result = operand1 + operand2;
-                            } else {
-                                result = operand1 + operand1;
-                            }
-                            break;
-                        case '*':
-                            if (isNaN(operand2) == false) {
-                                result = operand1 * operand2;
-                            } else {
-                                result = operand1 * operand1;
-                            }
-                            break;
-                        case '-':
-                            if (isNaN(operand2) == false) {
-                                result = operand1 - operand2;
-                            } else {
-                                result = operand1 - operand1;
-                            }
-                            break;
-                        case '/':
-                            if (isNaN(operand2) == false) {
-                                result = operand1 / operand2;
-                            } else {
-                                result = operand1 / operand1;
-                            }
-                            break;
-                    }
+                    result = performOperation(operator, operand1, operand2);
                     $('#screen').html(result);
                     operand1 = result;
                     break;
                 default:
                     if (isNaN(operand1) == false) {
                         operand2 = parseFloat(numberText);
+                        result = performOperation(operator, operand1, operand2);
+                        $('#screen').html(result);
+                        operand1 = result;
                     } else {
                         operand1 = parseFloat(numberText);
                     }
@@ -83,3 +57,38 @@ $(function() {
         }
     });
 });
+
+function performOperation(opr, opd1, opd2) {
+    switch (opr) {
+        case 'plus':
+            if (isNaN(opd2) == false) {
+                result = opd1 + opd2;
+            } else {
+                result = opd1 + opd1;
+            }
+            break;
+        case '*':
+            if (isNaN(opd2) == false) {
+                result = opd1 * opd2;
+            } else {
+                result = opd1 * opd1;
+            }
+            break;
+        case '-':
+            if (isNaN(opd2) == false) {
+                result = opd1 - opd2;
+            } else {
+                result = opd1 - opd1;
+            }
+            break;
+        case '/':
+            if (isNaN(opd2) == false) {
+                result = opd1 / opd2;
+            } else {
+                result = opd1 / opd1;
+            }
+            break;
+    }
+
+    return result;
+}
